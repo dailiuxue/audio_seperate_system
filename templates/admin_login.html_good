@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}管理员登录{% endblock %}
-{% block header %}语音分类服务管理员登录系统{% endblock %}
+{% block header %}语音分离服务管理员登录系统{% endblock %}
 {% block content %}
 <style>
     body {

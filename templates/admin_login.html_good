@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}管理员登录{% endblock %}
+{% block header %}语音分类服务管理员登录系统{% endblock %}
+{% block content %}
+<style>
+    body {
+        background-color: #f5f7fa; /* 背景色 */
+        font-family: Arial, Helvetica, sans-serif; /* 字体设置 */
+    }
+    .login-container {
+        max-width: 400px; /* 最大宽度 */
+        margin: 50px auto; /* 上下边距与水平居中 */
+        padding: 20px; /* 内边距 */
+        background-color: #ffffff; /* 白色背景 */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+        border-radius: 5px; /* 边框圆角 */
+    }
+    .form-group {
+        margin-bottom: 15px; /* 底部外边距 */
+    }
+    .form-control {
+        width: 100%; /* 宽度 */
+        padding: 10px; /* 内边距 */
+        border-radius: 4px; /* 边框圆角 */
+        border: 1px solid #dcdfe5; /* 边框颜色 */
+    }
+    .btn-primary {
+        width: 100%; /* 宽度 */
+        padding: 10px; /* 内边距 */
+        border-radius: 4px; /* 边框圆角 */
+        border: none; /* 无边框 */
+        background-color: #218838; /* 按钮颜色 */
+        color: white; /* 文字颜色 */
+        margin-top: 10px; /* 顶部外边距 */
+        cursor: pointer; /* 鼠标手势 */
+    }
+    .btn-primary:hover {
+        background-color: #003d82; /* 按钮悬停颜色 */
+    }
+    .form-header {
+        text-align: center; /* 居中对齐 */
+        margin-bottom: 20px; /* 底部外边距 */
+        color: #333; /* 文字颜色 */
+    }
+
+    @media (max-width: 768px) {
+        .login-container {
+            margin: 20px auto; /* 更小的上下边距 */
+        }
+    }
+</style>
+
+<div class="login-container">
+    <div class="form-header">
+        <h2>管理员登录</h2>
+    </div>
+    <form method="POST" action="{{ url_for('admin_login') }}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label }}<br>
+            {{ form.username(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label }}<br>
+            {{ form.password(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
+

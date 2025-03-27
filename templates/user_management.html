@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>语音分类服务用户管理系统</title>
+    <style>
+        /* General styling */
+        body {
+            background-color: #000000;
+            color: #000000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between; /* Align logout button to the right */
+            align-items: center; /* Align items vertically */
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #0a337f;
+            margin: 0; /* Remove margin to properly align with the button */
+        }
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px; /* Add spacing on top of the table */
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        /* Button styling */
+        .btn-green {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 0 0 auto; /* Auto margin to push it to the right */
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-green:hover {
+            background-color: #218838;
+        }
+        /* 删除按钮样式 */
+        .btn-red {
+            background-color: #dc3545; /* 红色背景 */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-red:hover {
+            background-color: #c82333; /* 深红色背景 */
+        }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px;
+                margin: 10px auto;
+            }
+            .header {
+                flex-direction: column; /* Stack items on smaller screens */
+                align-items: flex-start; /* Align to the left */
+            }
+            .btn-green {
+                margin-top: 20px; /* Add space between title and button */
+                width: 100%; /* Full-width buttons on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 页面标题和退出按钮 -->
+        <div class="header">
+            <h1>语音分类服务用户管理系统</h1>
+            <div>
+                <!-- 新增用户按钮，用于控制表单显示 -->
+                <button id="btn-add-user" class="btn-green">新增用户</button>
+                <!-- 退出管理员登录按钮 -->
+                <a href="{{ url_for('logout') }}" class="btn-green">退出管理员登录</a>
+            </div>
+        </div>
+ 
+        <!-- 新增用户表单，初始时隐藏 -->
+        <div id="form-add-user" style="display: none;">
+            <h2>添加新用户</h2>
+            <form action="{{ url_for('add_user') }}" method="post">
+                <input type="text" name="username" placeholder="用户名" required>
+                <input type="password" name="password" placeholder="密码" required>
+                <label>
+                    <input type="checkbox" name="has_permission"> 使用服务权限
+                </label>
+                <input type="submit" value="新增用户" class="btn-green">
+            </form>
+        </div>
+
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>用户名</th>
+                    <th>注册时间</th>
+                    <th>使用服务权限</th>
+                    <th>操作</th>
+                    <th>删除用户</th> <!-- 新增的列标题 -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.registered_at.strftime('%Y-%m-%d %H:%M:%S') if user.registered_at else '' }}</td>
+                    <td>{{ user.has_permission }}</td>
+                    <td>
+                        <form action="{{ url_for('update_permission', user_id=user.id) }}" method="post">
+                            <input type="checkbox" name="has_permission" {% if user.has_permission %} checked {% endif %}>
+                            <input type="submit" class="btn-green" value="修改权限">
+                        </form>
+                    </td>
+                    <td>
+                        <!-- 新增的删除按钮 -->
+                        <form action="{{ url_for('delete_user', user_id=user.id) }}" method="post">
+                            <input type="submit" value="删除" class="btn-red" onclick="return confirm('确定删除该用户？');">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+<!-- 使用JavaScript控制表单的显示和隐藏 -->
+<script>
+    document.getElementById('btn-add-user').onclick = function() {
+        var form = document.getElementById('form-add-user');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    };
+</script>
+
+
+</body>
+</html>
+

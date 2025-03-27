@@ -1,0 +1,105 @@
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #161b22;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: #58a6ff;
+}
+
+.table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 10px;
+    border: 1px solid #30363d;
+}
+
+.table th {
+    background-color: #161b22;
+}
+
+.table td {
+    background-color: #0d1117;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: center;  /* 确保内容居中 */
+}
+
+.form-control {
+    width: 300px;  /* 设置为合适的宽度 */
+    padding: 10px;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    display: inline-block;  /* 确保输入框居中 */
+}
+
+.form-control:focus {
+    border-color: #58a6ff;
+    outline: none;
+}
+
+.btn {
+    width: 320px;  /* 设置按钮宽度与输入框一致 */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #238636;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;  /* 确保按钮居中 */
+    text-align: center;  /* 确保按钮文字居中 */
+}
+
+.btn-primary {
+    background-color: #238636;
+}
+
+.btn:hover {
+    background-color: #2ea043;
+}
+
+.flashes {
+    list-style-type: none;
+    padding: 0;
+}
+
+.flashes li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.flashes .success {
+    background-color: #28a745;
+    color: white;
+}
+
+.flashes .danger {
+    background-color: #d73a49;
+    color: white;
+}
+
+a {
+    color: #58a6ff;
+}
+
